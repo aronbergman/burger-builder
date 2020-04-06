@@ -18,7 +18,7 @@ class BurgerIngridient extends React.Component {
                     </div>
                 );
                 break;
-            case ('meet'):
+            case ('meat'):
                 ingridient = <div className={classes.Meat}></div>;
                 break;
             case ('cheese'):
