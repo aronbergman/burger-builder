@@ -8,12 +8,11 @@ const BuildControl = props => {
             <button
                 className={classes.Less}
                 onClick={props.remove}
-            >Less
+                disabled={props.disabled}>Less
             </button>
             <button
                 className={classes.More}
-                onClick={props.added}
-            >More
+                onClick={props.added}>More
             </button>
         </div>
     )
