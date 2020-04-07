@@ -10,11 +10,19 @@
   padding: 32px 16px;
   box-sizing: border-box;
   transition: transform .3s ease-out;
+
+  nav {
+    margin-top: 20px;
+  }
 }
 
 @media (min-width: 500px) {
   .SideDriwer {
     display: none;
+
+    nav {
+      margin-top: 0;
+    }
   }
 }
 
