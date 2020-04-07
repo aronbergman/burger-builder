@@ -6,7 +6,7 @@ import classes from './SideDriwer.module.scss'
 const SideDriwer = props => {
     return (
         <div className={classes.SideDriwer}>
-            <Logo/>
+            <Logo height='10%'/>
             <nav>
                 <NavigationItems/>
             </nav>
