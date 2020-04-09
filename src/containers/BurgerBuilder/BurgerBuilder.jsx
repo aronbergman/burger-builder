@@ -16,23 +16,24 @@ const INGRIDIENT_PRICES = {
 };
 
 class BurgerBuilder extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {}
-    // }
 
     state = {
-        ingridients: {
-            salad: 0,
-            bacon: 0,
-            cheese: 0,
-            meat: 0
-        },
+        ingridients: null,
         totalPrice: 4,
         purchaseble: false,
         purchasing: false,
-        loading: false
+        loading: false,
+        error: false
     };
+
+    componentDidMount() {
+        axios.get('/ingridients.json',)
+            .then(res => {
+                this.setState({ingridients: res.data});
+                console.log('ingridients get', res.data)
+            })
+            .catch(err => this.setState({error: true}));
+    }
 
     updatePurchaseState(ingridients) {
         const sum = Object.keys(ingridients)
@@ -81,7 +82,7 @@ class BurgerBuilder extends React.Component {
 
     purchaseCancelHandler = () => {
         this.setState({purchasing: false});
-    }
+    };
 
     purchaseContinueHandler = () => {
         this.setState({loading: true});
@@ -115,22 +116,11 @@ class BurgerBuilder extends React.Component {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
 
-        let orderSummary = <OrderSummary
-            price={this.state.totalPrice}
-            cancel={this.purchaseCancelHandler}
-            continue={this.purchaseContinueHandler}
-            ingridients={this.state.ingridients}/>
+        let burger = this.state.error ? <p>Ingrigients can't be loadded</p> : <Spinner/>;
+        let orderSummary = null;
 
-        if (this.state.loading) {
-            orderSummary = <Spinner/>
-        }
-
-        return (
-            <Aux>
-                <Modal show={this.state.purchasing}
-                       modalClosed={this.purchaseCancelHandler}>
-                    {orderSummary}
-                </Modal>
+        if (this.state.ingridients) {
+            burger = (<Aux>
                 <Burger ingridients={this.state.ingridients}/>
                 <BuildControls
                     ingridientAdded={this.addIngridientHandler}
@@ -140,6 +130,24 @@ class BurgerBuilder extends React.Component {
                     price={this.state.totalPrice}
                     ordered={this.purchaseHandler}
                 />
+            </Aux>);
+
+            orderSummary = <OrderSummary
+                price={this.state.totalPrice}
+                cancel={this.purchaseCancelHandler}
+                continue={this.purchaseContinueHandler}
+                ingridients={this.state.ingridients}/>;
+        }
+
+        if (this.state.loading) orderSummary = <Spinner/>;
+
+        return (
+            <Aux>
+                <Modal show={this.state.purchasing}
+                       modalClosed={this.purchaseCancelHandler}>
+                    {orderSummary}
+                </Modal>
+                {burger}
             </Aux>
         );
     }
