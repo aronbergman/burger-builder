@@ -18,8 +18,8 @@ class ContactData extends React.Component {
     };
 
     orderHandler = async event => {
-        event.preventDefault();
-        this.setState({loading: true});
+        await event.preventDefault();
+        await this.setState({loading: true});
 
         const order = {
             ingridients: this.props.ingridients,
@@ -37,10 +37,14 @@ class ContactData extends React.Component {
         };
         console.log('order', order);
 
-        await axios.post('/orders.json', order)
+        await axios.post('/orders.json', JSON.stringify(order), {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
             .then(() => {
                 this.setState({loading: false});
-                this.props.history.push('/');
+                // this.props.history.push('/');
             })
             .catch(() => this.setState({loading: false}))
     };

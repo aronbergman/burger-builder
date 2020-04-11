@@ -34,10 +34,18 @@ class Orders extends React.Component {
     render() {
         return (
             <div>
-                <Order/>
+                {
+                    this.state.orders.map(order => (
+                        <Order
+                            price={order.price}
+                            ingridients={order.ingridients}
+                            key={order.id}
+                        />
+                    ))
+                }
             </div>
         )
     }
-};
+}
 
 export default withErrorHandler(Orders, axios);

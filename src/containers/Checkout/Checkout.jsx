@@ -14,8 +14,8 @@ class Checkout extends React.Component {
         const ingridients = {};
         let price = 0;
         for (let param of query) {
-            if (param[0] === 'price') {
-                price = param[1]
+            if (param[1] === '') {
+                price = +param[0]
             } else {
                 ingridients[param[0]] = +param[1]
             }
@@ -23,6 +23,7 @@ class Checkout extends React.Component {
         console.log('this.props.location.search', this.props.location.search);
         console.log('query', query);
         console.log('ingridients', ingridients);
+        console.log('price', price);
         this.setState({ingridients: ingridients, totalPrice: price})
     }
 
