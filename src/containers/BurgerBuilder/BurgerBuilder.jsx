@@ -27,6 +27,7 @@ class BurgerBuilder extends React.Component {
     };
 
     componentDidMount() {
+        console.log(this.props);
         axios.get('/ingridients.json',)
             .then(res => {
                 this.setState({ingridients: res.data});
@@ -105,6 +106,7 @@ class BurgerBuilder extends React.Component {
         axios.post('/orders.json', order)
             .then(() => this.setState({loading: false, purchasing: false}))
             .catch(() => this.setState({loading: false, purchasing: false}))
+        this.props.history.push('/checkout')
     };
 
     render() {
