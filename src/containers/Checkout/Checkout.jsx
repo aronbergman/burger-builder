@@ -2,37 +2,16 @@ import React from 'react'
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
 import {Route} from "react-router-dom";
 import ContactData from "./ContactData/ContactData";
+import {connect} from "react-redux";
 
 class Checkout extends React.Component {
-    state = {
-        ingridients: null,
-        totalPrice: 0
-    };
 
-    componentWillMount() {
-        const query = new URLSearchParams(this.props.location.search);
-        const ingridients = {};
-        let price = 0;
-        for (let param of query) {
-            if (param[1] === '') {
-                price = +param[0]
-            } else {
-                ingridients[param[0]] = +param[1]
-            }
-        }
-        console.log('this.props.location.search', this.props.location.search);
-        console.log('query', query);
-        console.log('ingridients', ingridients);
-        console.log('price', price);
-        this.setState({ingridients: ingridients, totalPrice: price})
-    }
 
     checkoutCancelledHandler = () => {
         this.props.history.goBack()
     };
 
     checkoutContinuedHandler = () => {
-        console.log('checkoutContinuedHandler')
         this.props.history.replace('/checkout/contact-data')
     };
 
@@ -41,11 +20,17 @@ class Checkout extends React.Component {
             <CheckoutSummary
                 onCheckoutCancelled={this.checkoutCancelledHandler}
                 onCheckoutContinued={this.checkoutContinuedHandler}
-                ingridients={this.state.ingridients}/>
+                ingridients={this.props.ings}/>
             <Route path={this.props.match.path + '/contact-data'}
-                   render={() => (<ContactData ingridients={this.state.ingridients} price={this.state.totalPrice}/>)}/>
+                   component={ContactData}/>
         </div>);
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        ings: state.ingridients
     }
 };
 
-export default Checkout;
+export default connect(mapStateToProps)(Checkout);

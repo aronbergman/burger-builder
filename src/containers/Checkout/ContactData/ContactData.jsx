@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from "react-redux";
 import Button from "../../../components/UI/Button/Button";
 import classes from './ContactData.module.scss'
 import axios from "../../../axios-orders";
@@ -22,7 +23,7 @@ class ContactData extends React.Component {
         await this.setState({loading: true});
 
         const order = {
-            ingridients: this.props.ingridients,
+            ingridients: this.props.ings,
             price: this.props.price,
             customer: {
                 name: 'Max',
@@ -69,4 +70,11 @@ class ContactData extends React.Component {
     }
 }
 
-export default withRouter(ContactData);
+const mapStateToProps = state => {
+    return {
+        ings: state.ingridients,
+        price: state.totalPrice
+    }
+};
+
+export default connect(mapStateToProps)(withRouter(ContactData));
