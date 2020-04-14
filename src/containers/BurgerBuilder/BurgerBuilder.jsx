@@ -1,4 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux'
+import * as actionTypes from './../../store/actions'
+
 import Aux from '../../hoc/Aux/Aux'
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
@@ -105,7 +108,7 @@ class BurgerBuilder extends React.Component {
 
     render() {
         const disabledInfo = {
-            ...this.state.ingridients
+            ...this.props.ings
         };
 
         for (let key in disabledInfo) {
@@ -115,12 +118,12 @@ class BurgerBuilder extends React.Component {
         let burger = this.state.error ? <p>Ingrigients can't be loadded</p> : <Spinner/>;
         let orderSummary = null;
 
-        if (this.state.ingridients) {
+        if (this.props.ings) {
             burger = (<Aux>
-                <Burger ingridients={this.state.ingridients}/>
+                <Burger ingridients={this.props.ings}/>
                 <BuildControls
-                    ingridientAdded={this.addIngridientHandler}
-                    ingridientRemoved={this.removeIngridientHandler}
+                    ingridientAdded={this.props.onIngridientAdded}
+                    ingridientRemoved={this.props.onIngridientRemoved}
                     disabled={disabledInfo}
                     purchasable={this.state.purchaseble}
                     price={this.state.totalPrice}
@@ -132,7 +135,7 @@ class BurgerBuilder extends React.Component {
                 price={this.state.totalPrice}
                 cancel={this.purchaseCancelHandler}
                 continue={this.purchaseContinueHandler}
-                ingridients={this.state.ingridients}/>;
+                ingridients={this.props.ings}/>;
         }
 
         if (this.state.loading) orderSummary = <Spinner/>;
@@ -149,4 +152,17 @@ class BurgerBuilder extends React.Component {
     }
 }
 
-export default withErrorHandler(BurgerBuilder, axios);
+const mapStateToProps = state => {
+    return {
+        ings: state.ingridients
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onIngridientAdded: (ingName) => dispatch({type: actionTypes.ADD_INGRIDIENTS, ingrdientName: ingName}),
+        onIngridientRemoved: (ingName) => dispatch({type: actionTypes.REMOVE_INGRIDIENTS, ingrdientName: ingName})
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));
