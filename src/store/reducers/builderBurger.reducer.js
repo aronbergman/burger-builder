@@ -37,7 +37,12 @@ const builderBurgerReducer = (state = initalState, action) => {
             return {
                 ...state,
                 error: false,
-                ingredients: action.ingredients
+                ingredients: {
+                    salad: action.ingredients.salad,
+                    bacon: action.ingredients.bacon,
+                    cheese: action.ingredients.cheese,
+                    meat: action.ingredients.meat
+                }
             };
         case actionTypes.FETCH_INGREDIENTS_FAILED:
             return {
