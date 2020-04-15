@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionTypes'
+import {updateObject} from './../utility';
 
 const totalPrice = 4;
 
@@ -23,15 +24,16 @@ const initalState = {
 const builderBurgerReducer = (state = initalState, action) => {
     switch (action.type) {
         case actionTypes.ADD_INGREDIENTS:
-            return {
-                ...state,
-                ingredients: {
-                    ...state.ingredients,
-                    [action.ingredientName]: state.ingredients[action.ingredientName] + 1
-                },
+            // The first option to reduce
+            const updetedIngredient = {[action.ingredientName]: state.ingredients[action.ingredientName] + 1};
+            const updatedIngredients = updateObject(state.ingredients, updetedIngredient);
+            const updatedState = {
+                ingredients: updatedIngredients,
                 totalPrice: state.totalPrice + Ingredient_PRICES[action.ingredientName]
             };
+            return updateObject(state, updatedState);
         case actionTypes.REMOVE_INGREDIENTS:
+            // The native option
             return {
                 ...state,
                 ingredients: {
