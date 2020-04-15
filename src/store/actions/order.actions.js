@@ -35,3 +35,9 @@ export const purchaseBurgerFetch = orderData => {
             .catch(err => dispatch(purchaseBurdeFail(err)))
     }
 };
+
+export const purchaseInit = () => {
+    return {
+        type: actionTypes.PURCHASE_INIT
+    }
+};
