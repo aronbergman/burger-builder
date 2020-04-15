@@ -7,5 +7,6 @@ export {
 } from './builderBurger.actions'
 export {
     purchaseBurgerFetch,
-    purchaseInit
+    purchaseInit,
+    fetchOrders
 } from './order.actions'
