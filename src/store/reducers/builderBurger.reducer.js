@@ -15,7 +15,7 @@ const initalState = {
 
 const builderBurgerReducer = (state = initalState, action) => {
     switch (action.type) {
-        case actionTypes.ADD_IngredientS:
+        case actionTypes.ADD_INGREDIENTS:
             return {
                 ...state,
                 ingredients: {
@@ -24,7 +24,7 @@ const builderBurgerReducer = (state = initalState, action) => {
                 },
                 totalPrice: state.totalPrice + Ingredient_PRICES[action.ingredientName]
             };
-        case actionTypes.REMOVE_IngredientS:
+        case actionTypes.REMOVE_INGREDIENTS:
             return {
                 ...state,
                 ingredients: {
@@ -32,6 +32,17 @@ const builderBurgerReducer = (state = initalState, action) => {
                     [action.ingredientName]: state.ingredients[action.ingredientName] - 1
                 },
                 totalPrice: state.totalPrice - Ingredient_PRICES[action.ingredientName]
+            };
+        case actionTypes.SET_INGREDIENTS:
+            return {
+                ...state,
+                error: false,
+                ingredients: action.ingredients
+            };
+        case actionTypes.FETCH_INGREDIENTS_FAILED:
+            return {
+                ...state,
+                error: action.error || true
             };
         default:
             return state;
