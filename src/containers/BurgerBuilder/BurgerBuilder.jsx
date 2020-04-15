@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import * as actionTypes from '../../store/actions/actionTypes'
+import axios from "./../../axios-orders";
+import * as builderBurgerActions from "../../store/actions/index";
 
 import Aux from '../../hoc/Aux/Aux'
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal"
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
-import axios from "./../../axios-orders";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
@@ -111,8 +111,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIngridientAdded: ingredientName => dispatch({type: actionTypes.ADD_INGRIDIENTS, ingredientName}),
-        onIngridientRemoved: ingredientName => dispatch({type: actionTypes.REMOVE_INGRIDIENTS, ingredientName})
+        onIngridientAdded: ingredientName => dispatch(builderBurgerActions.addIngredient(ingredientName)),
+        onIngridientRemoved: ingredientName => dispatch(builderBurgerActions.removedIngredient(ingredientName))
     }
 };
 
