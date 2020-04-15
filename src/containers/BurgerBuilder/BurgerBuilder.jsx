@@ -16,19 +16,11 @@ class BurgerBuilder extends React.Component {
     state = {
         totalPrice: 4,
         purchaseble: false,
-        purchasing: false,
-        loading: false,
-        error: false
+        purchasing: false
     };
 
     componentDidMount() {
         console.log(this.props);
-        axios.get('/ingridients.json',)
-            .then(res => {
-                this.setState({ingridients: res.data});
-                console.log('ingridients get', res.data)
-            })
-            .catch(err => this.setState({error: true}));
     }
 
     updatePurchaseState(ingridients) {
@@ -87,8 +79,6 @@ class BurgerBuilder extends React.Component {
                 continue={this.purchaseContinueHandler}
                 ingridients={this.props.ings}/>;
         }
-
-        if (this.state.loading) orderSummary = <Spinner/>;
 
         return (
             <Aux>
