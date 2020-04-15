@@ -39,7 +39,6 @@ class ContactData extends React.Component {
         };
         console.log('order', order);
         this.props.onOrderBurger(order)
-
     };
 
     render() {
@@ -52,6 +51,9 @@ class ContactData extends React.Component {
         </form>;
         if (this.props.loading) {
             form = <Spinner/>
+        }
+        if (!this.props.ings) {
+            this.props.history.push('/')
         }
         return (
             <div className={classes.ContactData}>
