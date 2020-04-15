@@ -3,36 +3,36 @@ import axios from "../../axios-orders";
 
 export const addIngredient = name => {
     return {
-        type: actionTypes.ADD_INGRIDIENTS,
+        type: actionTypes.ADD_IngredientS,
         ingredientName: name
     }
 };
 
 export const removedIngredient = name => {
     return {
-        type: actionTypes.REMOVE_INGRIDIENTS,
+        type: actionTypes.REMOVE_IngredientS,
         ingredientName: name
     }
 };
 
-export const setIngridients = ingridients => {
+export const setIngredients = ingredients => {
     return {
-        type: actionTypes.SET_INGRIDIENTS,
-        ingridients
+        type: actionTypes.SET_IngredientS,
+        ingredients
     }
 };
 
-export const fetchIngridientsFailed = error => {
+export const fetchIngredientsFailed = error => {
     return {
-        type: actionTypes.FETCH_INGRIDIENTS_FAILED,
+        type: actionTypes.FETCH_IngredientS_FAILED,
         error
     }
 };
 
-export const initIngridients = () => {
+export const initIngredients = () => {
     return dispatch => {
-        axios.get('/ingridients.json',)
-            .then(res => dispatch(setIngridients(res.data)))
-            .catch(err => dispatch(fetchIngridientsFailed(err)));
+        axios.get('/ingredients.json',)
+            .then(res => dispatch(setIngredients(res.data)))
+            .catch(err => dispatch(fetchIngredientsFailed(err)));
     }
 };

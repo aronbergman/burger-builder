@@ -2,19 +2,19 @@ import React from "react";
 import classes from './Order.module.scss'
 
 const order = props => {
-    const ingridients = [];
+    const ingredients = [];
 
-    for (let ingridientName in props.ingridients) {
-        ingridients.push({
-            name: ingridientName,
-            amount: props.ingridients[ingridientName]
+    for (let ingredientName in props.ingredients) {
+        ingredients.push({
+            name: ingredientName,
+            amount: props.ingredients[ingredientName]
         })
     }
 
-    console.log('props.ingridients', props.ingridients)
-    console.log('ingridients', ingridients)
+    console.log('props.ingredients', props.ingredients)
+    console.log('ingredients', ingredients)
 
-    const ingridientOutput = ingridients.map(ig => {
+    const ingredientOutput = ingredients.map(ig => {
         return <span style={{
             textTransform: 'capitalize',
             display: 'inline-block',
@@ -27,7 +27,7 @@ const order = props => {
 
     return (
         <div className={classes.Order}>
-            <p>Ingridients: {ingridientOutput}</p>
+            <p>Ingredients: {ingredientOutput}</p>
             <p>Price: <strong>USD {props.price.toFixed(2)}</strong></p>
         </div>
     )

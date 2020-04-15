@@ -23,10 +23,10 @@ class BurgerBuilder extends React.Component {
         console.log(this.props);
     }
 
-    updatePurchaseState(ingridients) {
-        const sum = Object.keys(ingridients)
+    updatePurchaseState(ingredients) {
+        const sum = Object.keys(ingredients)
             .map(isKey => {
-                return ingridients[isKey]
+                return ingredients[isKey]
             })
             .reduce((sum, el) => {
                 return sum + el;
@@ -62,10 +62,10 @@ class BurgerBuilder extends React.Component {
 
         if (this.props.ings) {
             burger = (<Aux>
-                <Burger ingridients={this.props.ings}/>
+                <Burger ingredients={this.props.ings}/>
                 <BuildControls
-                    ingridientAdded={this.props.onIngridientAdded}
-                    ingridientRemoved={this.props.onIngridientRemoved}
+                    ingredientAdded={this.props.onIngredientAdded}
+                    ingredientRemoved={this.props.onIngredientRemoved}
                     disabled={disabledInfo}
                     purchasable={this.updatePurchaseState(this.props.ings)}
                     price={this.props.price}
@@ -77,7 +77,7 @@ class BurgerBuilder extends React.Component {
                 price={this.props.price}
                 cancel={this.purchaseCancelHandler}
                 continue={this.purchaseContinueHandler}
-                ingridients={this.props.ings}/>;
+                ingredients={this.props.ings}/>;
         }
 
         return (
@@ -94,15 +94,15 @@ class BurgerBuilder extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        ings: state.ingridients,
+        ings: state.ingredients,
         price: state.totalPrice
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIngridientAdded: ingredientName => dispatch(builderBurgerActions.addIngredient(ingredientName)),
-        onIngridientRemoved: ingredientName => dispatch(builderBurgerActions.removedIngredient(ingredientName))
+        onIngredientAdded: ingredientName => dispatch(builderBurgerActions.addIngredient(ingredientName)),
+        onIngredientRemoved: ingredientName => dispatch(builderBurgerActions.removedIngredient(ingredientName))
     }
 };
 

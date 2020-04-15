@@ -38,7 +38,7 @@ class Orders extends React.Component {
                     this.state.orders.map(order => (
                         <Order
                             price={order.price}
-                            ingridients={order.ingridients}
+                            ingredients={order.ingredients}
                             key={order.id}
                         />
                     ))

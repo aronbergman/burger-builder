@@ -20,7 +20,7 @@ class Checkout extends React.Component {
             <CheckoutSummary
                 onCheckoutCancelled={this.checkoutCancelledHandler}
                 onCheckoutContinued={this.checkoutContinuedHandler}
-                ingridients={this.props.ings}/>
+                ingredients={this.props.ings}/>
             <Route path={this.props.match.path + '/contact-data'}
                    component={ContactData}/>
         </div>);
@@ -29,7 +29,7 @@ class Checkout extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        ings: state.ingridients
+        ings: state.ingredients
     }
 };
 

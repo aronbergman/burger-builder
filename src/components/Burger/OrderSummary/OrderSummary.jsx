@@ -9,19 +9,19 @@ class OrderSummary extends React.Component {
     }
 
     render() {
-        const ingridientSummary = Object.keys(this.props.ingridients)
+        const ingredientSummary = Object.keys(this.props.ingredients)
             .map(igKey => {
                 return <li key={igKey}>
-                    <span style={{textTransform: 'capitalize'}}>{igKey}</span>: {this.props.ingridients[igKey]}
+                    <span style={{textTransform: 'capitalize'}}>{igKey}</span>: {this.props.ingredients[igKey]}
                 </li>
             });
 
         return (
             <Aux>
                 <h3>Your Order</h3>
-                <p>A delicius burger with the following ingridients:</p>
+                <p>A delicius burger with the following ingredients:</p>
                 <ul>
-                    {ingridientSummary}
+                    {ingredientSummary}
                 </ul>
                 <p>Continue to Checkout</p>
                 <p><strong>Total Proce:</strong> {this.props.price.toFixed(2)}</p>

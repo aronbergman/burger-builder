@@ -23,7 +23,7 @@ class ContactData extends React.Component {
         await this.setState({loading: true});
 
         const order = {
-            ingridients: this.props.ings,
+            ingredients: this.props.ings,
             price: this.props.price,
             customer: {
                 name: 'Max',
@@ -72,7 +72,7 @@ class ContactData extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        ings: state.ingridients,
+        ings: state.ingredients,
         price: state.totalPrice
     }
 };

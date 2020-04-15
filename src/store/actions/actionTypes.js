@@ -1,4 +1,4 @@
-export const ADD_INGRIDIENTS = 'ADD_INGRIDIENTS';
-export const REMOVE_INGRIDIENTS = 'REMOVE_INGRIDIENTS';
-export const SET_INGRIDIENTS = 'SET_INGRIDIENTS';
-export const FETCH_INGRIDIENTS_FAILED = 'FETCH_INGRIDIENTS_FAILED';
+export const ADD_IngredientS = 'ADD_IngredientS';
+export const REMOVE_IngredientS = 'REMOVE_IngredientS';
+export const SET_IngredientS = 'SET_IngredientS';
+export const FETCH_IngredientS_FAILED = 'FETCH_IngredientS_FAILED';

@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes'
 
-const INGRIDIENT_PRICES = {
+const Ingredient_PRICES = {
     salad: .5,
     cheese: .4,
     meat: 1.3,
@@ -8,30 +8,30 @@ const INGRIDIENT_PRICES = {
 };
 
 const initalState = {
-    ingridients: null,
+    ingredients: null,
     totalPrice: 4,
     error: false
 };
 
 const builderBurgerReducer = (state = initalState, action) => {
     switch (action.type) {
-        case actionTypes.ADD_INGRIDIENTS:
+        case actionTypes.ADD_IngredientS:
             return {
                 ...state,
-                ingridients: {
-                    ...state.ingridients,
-                    [action.ingredientName]: state.ingridients[action.ingredientName] + 1
+                ingredients: {
+                    ...state.ingredients,
+                    [action.ingredientName]: state.ingredients[action.ingredientName] + 1
                 },
-                totalPrice: state.totalPrice + INGRIDIENT_PRICES[action.ingredientName]
+                totalPrice: state.totalPrice + Ingredient_PRICES[action.ingredientName]
             };
-        case actionTypes.REMOVE_INGRIDIENTS:
+        case actionTypes.REMOVE_IngredientS:
             return {
                 ...state,
-                ingridients: {
-                    ...state.ingridients,
-                    [action.ingredientName]: state.ingridients[action.ingredientName] - 1
+                ingredients: {
+                    ...state.ingredients,
+                    [action.ingredientName]: state.ingredients[action.ingredientName] - 1
                 },
-                totalPrice: state.totalPrice - INGRIDIENT_PRICES[action.ingredientName]
+                totalPrice: state.totalPrice - Ingredient_PRICES[action.ingredientName]
             };
         default:
             return state;

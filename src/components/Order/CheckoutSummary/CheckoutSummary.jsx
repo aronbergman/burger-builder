@@ -8,7 +8,7 @@ const checkoutSummary = props => {
         <div className={classes.CheckoutSummary}>
             <h1>We hope it tastes well!</h1>
             <div className={classes.CheckoutSummaryWrap}>
-                <Burger ingridients={props.ingridients}/>
+                <Burger ingredients={props.ingredients}/>
             </div>
             <Button
                 clicked={props.onCheckoutCancelled}
