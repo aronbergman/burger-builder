@@ -50,7 +50,7 @@ class ContactData extends React.Component {
             <input type="text" name="postal-code" placeholder="Your postal code"/>
             <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
         </form>;
-        if (this.state.loading) {
+        if (this.props.loading) {
             form = <Spinner/>
         }
         return (
@@ -71,7 +71,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onOrderBurger: orderData => dispatch(actions.purchaseBurgerStart(orderData))
+        onOrderBurger: orderData => dispatch(actions.purchaseBurgerFetch(orderData))
     }
 };
 
