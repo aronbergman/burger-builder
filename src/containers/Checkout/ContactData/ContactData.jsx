@@ -38,16 +38,7 @@ class ContactData extends React.Component {
         };
         console.log('order', order);
 
-        await axios.post('/orders.json', JSON.stringify(order), {
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then(() => {
-                this.setState({loading: false});
-                // this.props.history.push('/');
-            })
-            .catch(() => this.setState({loading: false}))
+
     };
 
     render() {
