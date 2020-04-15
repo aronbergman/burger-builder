@@ -5,6 +5,8 @@ import classes from './ContactData.module.scss'
 import axios from "../../../axios-orders";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import {withRouter} from "react-router-dom";
+import * as actions from "../../../store/actions/index";
+import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 
 class ContactData extends React.Component {
     state = {
@@ -20,7 +22,6 @@ class ContactData extends React.Component {
 
     orderHandler = async event => {
         await event.preventDefault();
-        await this.setState({loading: true});
 
         const order = {
             ingredients: this.props.ings,
@@ -37,7 +38,7 @@ class ContactData extends React.Component {
             deliveryMethod: 'fastest'
         };
         console.log('order', order);
-
+        this.props.onOrderBurger(order)
 
     };
 
@@ -68,4 +69,10 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps)(withRouter(ContactData));
+const mapDispatchToProps = dispatch => {
+    return {
+        onOrderBurger: orderData => dispatch(actions.purchaseBurgerStart(orderData))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withErrorHandler(ContactData, axios)));
