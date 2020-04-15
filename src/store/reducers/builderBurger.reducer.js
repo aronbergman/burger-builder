@@ -1,5 +1,7 @@
 import * as actionTypes from '../actions/actionTypes'
 
+const totalPrice = 4;
+
 const Ingredient_PRICES = {
     salad: .5,
     cheese: .4,
@@ -14,7 +16,7 @@ const initalState = {
         meat: 0,
         bacon: 0
     },
-    totalPrice: 4,
+    totalPrice: totalPrice,
     error: false
 };
 
@@ -42,6 +44,7 @@ const builderBurgerReducer = (state = initalState, action) => {
             return {
                 ...state,
                 error: false,
+                totalPrice: totalPrice,
                 ingredients: {
                     salad: action.ingredients.salad,
                     bacon: action.ingredients.bacon,
